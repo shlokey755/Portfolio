@@ -19,15 +19,21 @@
     <section id="home">
         <p>I enjoy coding and playing games.</p>
         <h3>My hobby:-</h3>
-        <ol>
+        <ol id="hobbyList">
             <li>Playing Football</li>
             <li>Coding</li>
             <li>Watching Shows</li>
         </ol>
+
+        <input type="text" id="hobbyInput" placeholder="Add hobby benefit">
+        <button onclick="addHobby()">Add</button>
+
     </section>
+
     <section id="about">
         <p>I am 18 years old and eager to learn about new things.</p>
     </section>
+
     <section id="projects">
         <h2>PROJECTS</h2>
         <div class="project-container">
@@ -42,15 +48,15 @@
             </div>
         </div>
     </section>
-    </section>
 
+    
     <section id="contact">
         <h2>Contact Me</h2>
-        <form>
+        <form onsubmit="return submitForm()">
             <input placeholder="Name"><br>
             <input placeholder="Email"><br>
             <textarea placeholder="Message"></textarea><br>
-            <button>Submit</button>
+            <button type="submit">Submit</button>
         </form>
     </section>
 
@@ -62,6 +68,79 @@
         <nav>
             <a href="github">GitHub</a>
         </nav>
+        <p id="dateTime"></p>
     </footer>
+
+<script>
+
+// Function to add delete button to every list item
+function addDeleteButton(li){
+
+let deleteBtn = document.createElement("button");
+deleteBtn.textContent = " Delete";
+
+deleteBtn.onclick = function(){
+li.remove();
+};
+
+li.appendChild(deleteBtn);
+
+}
+
+
+// Add Hobby Item
+function addHobby(){
+
+let input = document.getElementById("hobbyInput");
+let text = input.value;
+
+if(text === "") return;
+
+let li = document.createElement("li");
+li.textContent = text;
+
+addDeleteButton(li);
+
+document.getElementById("hobbyList").appendChild(li);
+
+input.value = "";
+
+}
+
+
+// Add delete buttons to existing list items
+window.onload = function(){
+
+let items = document.querySelectorAll("#hobbyList li");
+
+items.forEach(function(li){
+addDeleteButton(li);
+});
+
+showDateTime();
+
+}
+
+
+// Contact Form Alert
+function submitForm(){
+alert("Form submitted successfully!");
+return true;
+}
+
+
+// Dynamic Date and Time
+function showDateTime(){
+
+let now = new Date();
+
+document.getElementById("dateTime").innerHTML =
+now.toLocaleString();
+
+}
+
+setInterval(showDateTime,1000);
+
+</script>
 
 </body>
