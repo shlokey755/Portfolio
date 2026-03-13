@@ -1,12 +1,18 @@
+# Logs
+*.log
+
 # OS files
 .DS_Store
 Thumbs.db
 
-# VS Code settings
+# IDE / Editor settings
 .vscode/
+.idea/
 
-# Logs
-*.log
+# Temporary files
+*.tmp
+*.swp
 
-# Environment files
+# Environment variables
 .env
+

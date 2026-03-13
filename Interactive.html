@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQ Page</title>
+
+<style>
+
+/* Page Styling */
+
+body{
+font-family: Arial, sans-serif;
+margin:0;
+background:#f5f7fb;
+}
+
+/* Header */
+
+header{
+background:#4a6cf7;
+color:white;
+text-align:center;
+padding:30px;
+}
+
+header h1{
+margin:0;
+}
+
+/* FAQ Section */
+
+.faq-section{
+max-width:800px;
+margin:40px auto;
+padding:20px;
+}
+
+.faq-item{
+background:white;
+margin-bottom:15px;
+border-radius:8px;
+box-shadow:0 2px 8px rgba(0,0,0,0.1);
+overflow:hidden;
+transition:all 0.3s;
+}
+
+.question{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:18px;
+font-weight:bold;
+cursor:pointer;
+background:#eef1ff;
+}
+
+.question:hover{
+background:#dfe4ff;
+}
+
+.icon{
+font-size:22px;
+color:#4a6cf7;
+}
+
+.answer{
+padding:18px;
+display:none;
+border-top:1px solid #ddd;
+line-height:1.6;
+}
+
+.faq-item.active .answer{
+display:block;
+animation:fade 0.3s ease-in-out;
+}
+
+@keyframes fade{
+from{opacity:0; transform:translateY(-5px);}
+to{opacity:1; transform:translateY(0);}
+}
+
+/* Footer */
+
+footer{
+text-align:center;
+padding:20px;
+background:#222;
+color:white;
+margin-top:40px;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Frequently Asked Questions</h1>
+<p>Click a question to reveal the answer</p>
+</header>
+
+<section class="faq-section">
+<div id="faq-container"></div>
+</section>
+
+<footer>
+<p>© 2026 FAQ Website</p>
+</footer>
+
+<script>
+
+/* QAItem Class */
+
+class QAItem{
+
+constructor(question,answer){
+this.question=question
+this.answer=answer
+}
+
+render(){
+
+const item=document.createElement("div")
+item.classList.add("faq-item")
+
+const questionDiv=document.createElement("div")
+questionDiv.classList.add("question")
+
+const text=document.createElement("span")
+text.textContent=this.question
+
+const icon=document.createElement("span")
+icon.classList.add("icon")
+icon.textContent="+"
+
+questionDiv.appendChild(text)
+questionDiv.appendChild(icon)
+
+const answerDiv=document.createElement("div")
+answerDiv.classList.add("answer")
+answerDiv.textContent=this.answer
+
+item.appendChild(questionDiv)
+item.appendChild(answerDiv)
+
+questionDiv.addEventListener("click",()=>{
+this.toggle(item,icon)
+})
+
+return item
+}
+
+toggle(item,icon){
+
+item.classList.toggle("active")
+
+if(item.classList.contains("active")){
+icon.textContent="-"
+}
+else{
+icon.textContent="+"
+}
+
+}
+
+}
+
+/* FAQ Data */
+
+const faqData=[
+
+new QAItem(
+"What is HTML?",
+"HTML stands for HyperText Markup Language. It is used to structure the content of webpages."
+),
+
+new QAItem(
+"What is CSS?",
+"CSS stands for Cascading Style Sheets. It is used to style and design web pages."
+),
+
+new QAItem(
+"What is JavaScript?",
+"JavaScript is a programming language used to make webpages interactive."
+),
+
+new QAItem(
+"Why use Object-Oriented Programming?",
+"OOP helps organize code using objects and classes which makes programs easier to manage and reuse."
+)
+
+]
+
+/* Render FAQ */
+
+const container=document.getElementById("faq-container")
+
+faqData.forEach(item=>{
+container.appendChild(item.render())
+})
+
+</script>
+
+</body>
+</html>
